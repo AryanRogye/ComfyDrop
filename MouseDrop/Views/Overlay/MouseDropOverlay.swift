@@ -9,13 +9,20 @@ import AppKit
 import SwiftUI
 
 struct MouseDropOverlay: View {
-    @Bindable var mouseWatcher: MouseWatcher
     @ObservedObject var folderStore: FolderStore
     var onClose: () -> Void
+    
+    init(folderStore: FolderStore, onClose: @escaping () -> Void) {
+        self.folderStore = folderStore
+        self.onClose = onClose
+        self.reloadFolderItems()
+    }
     
     @State private var folderItems: [OverlayFolderItem] = []
     @State private var loadError: String?
     @State private var hoveredID: URL? = nil
+    @State private var monitor = FolderMonitor()
+
     
     var body: some View {
         MouseDropOverlayCard(
@@ -27,15 +34,26 @@ struct MouseDropOverlay: View {
             onClose: onClose,
             dragProvider: dragProvider(for:)
         )
-            .position(x: overlayPosition.x, y: overlayPosition.y)
-            .onAppear(perform: reloadFolderItems)
-            .onReceive(NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)) { _ in
-                reloadFolderItems()
-            }
-            .ignoresSafeArea()
+        .onAppear {
+            reloadFolderItems()
+            startMonitoringFolder()
+        }
+        .onDisappear {
+            monitor.stopMonitoring()
+        }
     }
     
     // MARK: - Helpers
+    
+    private func startMonitoringFolder() {
+        guard let folderURL = folderStore.resolvedWatchFolderURL() else { return }
+        
+        monitor.onChange = {
+            reloadFolderItems()
+        }
+        
+        monitor.startMonitoring(url: folderURL)
+    }
     
     private var hasSelectedFolder: Bool {
         folderStore.watchFolder != nil || folderStore.resolvedWatchFolderURL() != nil
@@ -45,17 +63,6 @@ struct MouseDropOverlay: View {
         folderStore.watchFolder?.lastPathComponent
         ?? folderStore.resolvedWatchFolderURL()?.lastPathComponent
         ?? "No Folder Selected"
-    }
-    
-    private var overlayPosition: CGPoint {
-        guard let screen = screenContaining(point: mouseWatcher.center) else { return .zero }
-        let localX = mouseWatcher.center.x - screen.frame.minX
-        let localY = mouseWatcher.center.y - screen.frame.minY
-        return CGPoint(x: localX, y: screen.frame.height - localY)
-    }
-    
-    private func screenContaining(point: NSPoint) -> NSScreen? {
-        NSScreen.screens.first { NSMouseInRect(point, $0.frame, false) }
     }
     
     private func reloadFolderItems() {

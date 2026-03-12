@@ -147,6 +147,9 @@ class MouseWatcher {
     }
     
     public func stop() {
+        if let monitor {
+            NSEvent.removeMonitor(monitor)
+        }
         monitor = nil
     }
     
