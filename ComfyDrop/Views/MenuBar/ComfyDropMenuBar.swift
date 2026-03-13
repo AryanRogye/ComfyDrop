@@ -25,6 +25,8 @@ struct ComfyDropMenuBar: View {
         )
     }
     
+    @State private var wantsToQuit = false
+    
     var body: some View {
         // MARK: - Toggle
         Button(vm.started ? "Stop" : "Start") {
@@ -71,5 +73,19 @@ struct ComfyDropMenuBar: View {
         
         // MARK: - Gesture Control
         Toggle("Strict Gestures", isOn: $settingsStore.strictGestures)
+        
+        
+        Button("Quit") {
+            let alert = NSAlert()
+            alert.messageText = "Quit ComfyDrop?"
+            alert.informativeText = "Are you sure you want to quit?"
+            alert.alertStyle = .warning
+            alert.addButton(withTitle: "Quit")
+            alert.addButton(withTitle: "Cancel")
+            
+            if alert.runModal() == .alertFirstButtonReturn {
+                NSApp.terminate(nil)
+            }
+        }
     }
 }
