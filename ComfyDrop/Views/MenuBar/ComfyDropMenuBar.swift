@@ -66,10 +66,12 @@ struct ComfyDropMenuBar: View {
             }
         }
         
+        #if DEBUG
         // MARK: - Window
         Button("View Mouse Movements") {
             openWindow(id: "MMouseVisualizer")
         }
+        #endif
         
         // MARK: - Gesture Control
         Toggle("Strict Gestures", isOn: $settingsStore.strictGestures)

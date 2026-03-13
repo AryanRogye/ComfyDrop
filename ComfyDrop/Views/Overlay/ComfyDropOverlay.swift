@@ -45,6 +45,7 @@ struct ComfyDropOverlay: View {
         .onDisappear {
             vm.stop()
         }
+        .shadow(color: .black.opacity(0.35), radius: 12, x: 0, y: 6)
     }
     
     private func dragProvider(for item: OverlayFolderItem) -> NSItemProvider {

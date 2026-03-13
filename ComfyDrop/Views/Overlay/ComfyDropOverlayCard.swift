@@ -52,7 +52,7 @@ struct ComfyDropOverlayCard: View {
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .stroke(Color.white.opacity(0.1), lineWidth: 0.5)
         )
-        .shadow(color: .black.opacity(0.5), radius: 20, y: 8)
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 }
 

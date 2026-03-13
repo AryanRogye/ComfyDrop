@@ -57,6 +57,7 @@ class ComfyDropOverlayCoordinator {
                 folderStore: folderStore,
                 onClose: hide,
             )
+            .padding(100)
         )
         panel.contentView = view
         positionPanel(around: mouseWatcher.center)

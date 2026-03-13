@@ -33,9 +33,11 @@ struct ComfyDropApp: App {
             Image(systemName: "computermouse")
         }
         
+#if DEBUG
         Window("MouseVisualizer", id: "MMouseVisualizer") {
             MouseVisualizer(mouseWatcher: appDelegate.mouseWatcher)
         }
         .defaultLaunchBehavior(.suppressed)
+#endif
     }
 }

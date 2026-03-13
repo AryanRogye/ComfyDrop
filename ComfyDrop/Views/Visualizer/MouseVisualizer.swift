@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+#if DEBUG
 /// Disclaimer: UI Made with Claude
 
 /// Struct to visualize points
@@ -95,3 +96,5 @@ struct MouseVisualizer: View {
         }
     }
 }
+
+#endif
