@@ -1,12 +1,13 @@
 //
 //  FolderWatcher.swift
-//  MouseDrop
+//  ComfyDrop
 //
 //  Created by Aryan Rogye on 3/12/26.
 //
 
 import Foundation
 
+@MainActor
 final class FolderMonitor {
     private var fileDescriptor: CInt = -1
     private var source: DispatchSourceFileSystemObject?
@@ -57,6 +58,7 @@ final class FolderMonitor {
         }
     }
     
+    @MainActor
     deinit {
         stopMonitoring()
     }

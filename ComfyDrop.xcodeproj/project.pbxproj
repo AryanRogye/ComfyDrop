@@ -10,14 +10,30 @@
 		9B15CC812F633B2900CF8CBA /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 9B15CC802F633B2900CF8CBA /* Defaults */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		9B15CCD82F64705100CF8CBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B15CC402F630C4500CF8CBA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B15CC472F630C4500CF8CBA;
+			remoteInfo = ComfyDrop;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		9B15CC482F630C4500CF8CBA /* MouseDrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MouseDrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B15CC482F630C4500CF8CBA /* ComfyDrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComfyDrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B15CCD42F64705100CF8CBA /* ComfyDropTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComfyDropTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		9B15CC4A2F630C4500CF8CBA /* MouseDrop */ = {
+		9B15CC4A2F630C4500CF8CBA /* ComfyDrop */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = MouseDrop;
+			path = ComfyDrop;
+			sourceTree = "<group>";
+		};
+		9B15CCD52F64705100CF8CBA /* ComfyDropTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ComfyDropTests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -31,13 +47,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B15CCD12F64705100CF8CBA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		9B15CC3F2F630C4500CF8CBA = {
 			isa = PBXGroup;
 			children = (
-				9B15CC4A2F630C4500CF8CBA /* MouseDrop */,
+				9B15CC4A2F630C4500CF8CBA /* ComfyDrop */,
+				9B15CCD52F64705100CF8CBA /* ComfyDropTests */,
 				9B15CC492F630C4500CF8CBA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -45,7 +69,8 @@
 		9B15CC492F630C4500CF8CBA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9B15CC482F630C4500CF8CBA /* MouseDrop.app */,
+				9B15CC482F630C4500CF8CBA /* ComfyDrop.app */,
+				9B15CCD42F64705100CF8CBA /* ComfyDropTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -53,9 +78,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9B15CC472F630C4500CF8CBA /* MouseDrop */ = {
+		9B15CC472F630C4500CF8CBA /* ComfyDrop */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9B15CC532F630C4600CF8CBA /* Build configuration list for PBXNativeTarget "MouseDrop" */;
+			buildConfigurationList = 9B15CC532F630C4600CF8CBA /* Build configuration list for PBXNativeTarget "ComfyDrop" */;
 			buildPhases = (
 				9B15CC442F630C4500CF8CBA /* Sources */,
 				9B15CC452F630C4500CF8CBA /* Frameworks */,
@@ -66,15 +91,38 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				9B15CC4A2F630C4500CF8CBA /* MouseDrop */,
+				9B15CC4A2F630C4500CF8CBA /* ComfyDrop */,
 			);
-			name = MouseDrop;
+			name = ComfyDrop;
 			packageProductDependencies = (
 				9B15CC802F633B2900CF8CBA /* Defaults */,
 			);
-			productName = MouseDrop;
-			productReference = 9B15CC482F630C4500CF8CBA /* MouseDrop.app */;
+			productName = ComfyDrop;
+			productReference = 9B15CC482F630C4500CF8CBA /* ComfyDrop.app */;
 			productType = "com.apple.product-type.application";
+		};
+		9B15CCD32F64705100CF8CBA /* ComfyDropTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B15CCDA2F64705100CF8CBA /* Build configuration list for PBXNativeTarget "ComfyDropTests" */;
+			buildPhases = (
+				9B15CCD02F64705100CF8CBA /* Sources */,
+				9B15CCD12F64705100CF8CBA /* Frameworks */,
+				9B15CCD22F64705100CF8CBA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9B15CCD92F64705100CF8CBA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				9B15CCD52F64705100CF8CBA /* ComfyDropTests */,
+			);
+			name = ComfyDropTests;
+			packageProductDependencies = (
+			);
+			productName = ComfyDropTests;
+			productReference = 9B15CCD42F64705100CF8CBA /* ComfyDropTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -89,9 +137,13 @@
 					9B15CC472F630C4500CF8CBA = {
 						CreatedOnToolsVersion = 26.3;
 					};
+					9B15CCD32F64705100CF8CBA = {
+						CreatedOnToolsVersion = 26.3;
+						TestTargetID = 9B15CC472F630C4500CF8CBA;
+					};
 				};
 			};
-			buildConfigurationList = 9B15CC432F630C4500CF8CBA /* Build configuration list for PBXProject "MouseDrop" */;
+			buildConfigurationList = 9B15CC432F630C4500CF8CBA /* Build configuration list for PBXProject "ComfyDrop" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -108,13 +160,21 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9B15CC472F630C4500CF8CBA /* MouseDrop */,
+				9B15CC472F630C4500CF8CBA /* ComfyDrop */,
+				9B15CCD32F64705100CF8CBA /* ComfyDropTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9B15CC462F630C4500CF8CBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B15CCD22F64705100CF8CBA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -131,7 +191,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B15CCD02F64705100CF8CBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9B15CCD92F64705100CF8CBA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B15CC472F630C4500CF8CBA /* ComfyDrop */;
+			targetProxy = 9B15CCD82F64705100CF8CBA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		9B15CC512F630C4600CF8CBA /* Debug */ = {
@@ -276,7 +351,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aryanrogye.MouseDrop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aryanrogye.ComfyDrop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -310,7 +385,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aryanrogye.MouseDrop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aryanrogye.ComfyDrop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -322,10 +397,50 @@
 			};
 			name = Release;
 		};
+		9B15CCDB2F64705100CF8CBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B9P888266K;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aryanrogye.ComfyDropTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ComfyDrop.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ComfyDrop";
+			};
+			name = Debug;
+		};
+		9B15CCDC2F64705100CF8CBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B9P888266K;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aryanrogye.ComfyDropTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ComfyDrop.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ComfyDrop";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9B15CC432F630C4500CF8CBA /* Build configuration list for PBXProject "MouseDrop" */ = {
+		9B15CC432F630C4500CF8CBA /* Build configuration list for PBXProject "ComfyDrop" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9B15CC512F630C4600CF8CBA /* Debug */,
@@ -334,11 +449,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9B15CC532F630C4600CF8CBA /* Build configuration list for PBXNativeTarget "MouseDrop" */ = {
+		9B15CC532F630C4600CF8CBA /* Build configuration list for PBXNativeTarget "ComfyDrop" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9B15CC542F630C4600CF8CBA /* Debug */,
 				9B15CC552F630C4600CF8CBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B15CCDA2F64705100CF8CBA /* Build configuration list for PBXNativeTarget "ComfyDropTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B15CCDB2F64705100CF8CBA /* Debug */,
+				9B15CCDC2F64705100CF8CBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

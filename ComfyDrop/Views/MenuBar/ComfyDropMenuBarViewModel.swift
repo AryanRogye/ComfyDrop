@@ -1,6 +1,6 @@
 //
-//  MouseDropViewModel.swift
-//  MouseDrop
+//  ComfyDropMenuBarViewModel.swift
+//  ComfyDrop
 //
 //  Created by Aryan Rogye on 3/12/26.
 //
@@ -9,7 +9,7 @@ import Foundation
 
 @Observable
 @MainActor
-class MouseDropViewModel {
+class ComfyDropMenuBarViewModel {
     
     var started = false
     

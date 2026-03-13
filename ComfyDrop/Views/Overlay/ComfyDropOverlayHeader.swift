@@ -1,6 +1,6 @@
 //
-//  MouseDropOverlayHeader.swift
-//  MouseDrop
+//  ComfyDropOverlayHeader.swift
+//  ComfyDrop
 //
 //  Created by Aryan Rogye on 3/12/26.
 //
@@ -8,7 +8,7 @@
 import AppKit
 import SwiftUI
 
-struct MouseDropOverlayHeader: View {
+struct ComfyDropOverlayHeader: View {
     let selectedFolderName: String
     let itemCount: Int
     let onClose: () -> Void

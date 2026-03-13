@@ -1,6 +1,6 @@
 //
 //  OverlayFolderItem.swift
-//  MouseDrop
+//  ComfyDrop
 //
 //  Created by Aryan Rogye on 3/12/26.
 //
@@ -31,5 +31,26 @@ struct OverlayFolderItem: Identifiable {
     static func isImageFile(_ url: URL) -> Bool {
         guard let type = UTType(filenameExtension: url.pathExtension) else { return false }
         return type.conforms(to: .image)
+    }
+}
+
+extension URL {
+    func toOverlayFolderItem(keys: Set<URLResourceKey>) -> OverlayFolderItem? {
+        guard let values = try? self.resourceValues(forKeys: keys) else { return nil }
+        
+        let isDirectory = values.isDirectory ?? false
+        
+        let previewImage = (
+            (!isDirectory && OverlayFolderItem.isImageFile(self))
+            ? NSImage(contentsOf: self)
+            : nil
+        )
+        
+        return OverlayFolderItem(
+            id: self,
+            url: self,
+            isDirectory: isDirectory,
+            previewImage: previewImage
+        )
     }
 }

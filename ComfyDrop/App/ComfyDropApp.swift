@@ -1,6 +1,6 @@
 //
-//  MouseDropApp.swift
-//  MouseDrop
+//  ComfyDropApp.swift
+//  ComfyDrop
 //
 //  Created by Aryan Rogye on 3/12/26.
 //
@@ -17,13 +17,13 @@ struct Helpers {
 }
 
 @main
-struct MouseDropApp: App {
+struct ComfyDropApp: App {
     
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     var body: some Scene {
         MenuBarExtra {
-            MouseDropMenuBar(
+            ComfyDropMenuBar(
                 mouseWatcher: appDelegate.mouseWatcher,
                 settingsStore: appDelegate.settingsStore,
                 folderStore: appDelegate.folderStore

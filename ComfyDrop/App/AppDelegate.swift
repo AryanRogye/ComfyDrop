@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  MouseDrop
+//  ComfyDrop
 //
 //  Created by Aryan Rogye on 3/12/26.
 //
@@ -11,22 +11,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     var mouseWatcher : MouseWatcher
     var folderStore  = FolderStore()
-    var mouseDropOverlay : MouseDropOverlayCoordinator
+    var comfyDropOverlay : ComfyDropOverlayCoordinator
     var settingsStore = SettingsStore()
     
     @MainActor
     override init() {
         NSApp.setActivationPolicy(.accessory)
         self.mouseWatcher = MouseWatcher(settingsStore: settingsStore)
-        self.mouseDropOverlay = .init(
+        self.comfyDropOverlay = .init(
             mouseWatcher: mouseWatcher,
             folderStore: folderStore
         )
         super.init()
         mouseWatcher.onMouseActivation = { [weak self] in
             guard let self else { return }
-            mouseDropOverlay.hide()
-            mouseDropOverlay.show()
+            comfyDropOverlay.hide()
+            comfyDropOverlay.show()
         }
     }
     

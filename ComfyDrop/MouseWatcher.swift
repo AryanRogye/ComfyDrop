@@ -1,6 +1,6 @@
 //
 //  MouseWatcher.swift
-//  MouseDrop
+//  ComfyDrop
 //
 //  Created by Aryan Rogye on 3/12/26.
 //

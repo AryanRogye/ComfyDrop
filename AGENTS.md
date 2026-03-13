@@ -1,6 +1,7 @@
 # AGENTS.md
 
 - please reference `./swiftui-pro` for the best practices
+- if u make a folder for testing, delete it afterwards
 
 ## UI
 - **Self-critique before delivering.** After implementing any UI, ask: Does visual weight match content importance? Are buttons grouped by hierarchy (primary → secondary → destructive)? Do columns feel balanced — if one side is dense and the other sparse, reconsider the split. Is empty space intentional or wasted? Does every section have a clear visual purpose? If any of these fail, revise first.

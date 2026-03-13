@@ -1,6 +1,6 @@
 //
-//  MouseDropMenuBar.swift
-//  MouseDrop
+//  ComfyDropMenuBar.swift
+//  ComfyDrop
 //
 //  Created by Aryan Rogye on 3/12/26.
 //
@@ -9,26 +9,29 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 /// MenuBar View
-struct MouseDropMenuBar: View {
+struct ComfyDropMenuBar: View {
     
     @State private var settingsStore: SettingsStore
-    @State private var vm : MouseDropViewModel
+    @State private var vm : ComfyDropMenuBarViewModel
     @State private var isImporting = false
     
     @Environment(\.openWindow) var openWindow
     
     init(mouseWatcher: MouseWatcher, settingsStore: SettingsStore, folderStore: FolderStore) {
         self.settingsStore = settingsStore
-        vm = MouseDropViewModel(
+        vm = ComfyDropMenuBarViewModel(
             mouseWatcher: mouseWatcher,
             folderStore: folderStore
         )
     }
     
     var body: some View {
+        // MARK: - Toggle
         Button(vm.started ? "Stop" : "Start") {
             vm.toggle()
         }
+        
+        // MARK: - Folder Selection
         Button(action: {
             isImporting = true
         }) {
@@ -61,10 +64,12 @@ struct MouseDropMenuBar: View {
             }
         }
         
+        // MARK: - Window
         Button("View Mouse Movements") {
             openWindow(id: "MMouseVisualizer")
         }
         
+        // MARK: - Gesture Control
         Toggle("Strict Gestures", isOn: $settingsStore.strictGestures)
     }
 }

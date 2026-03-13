@@ -1,6 +1,6 @@
 //
-//  MouseDropOverlayCard.swift
-//  MouseDrop
+//  ComfyDropOverlayCard.swift
+//  ComfyDrop
 //
 //  Created by Aryan Rogye on 3/12/26.
 //
@@ -8,32 +8,31 @@
 import AppKit
 import SwiftUI
 
-struct MouseDropOverlayCard: View {
+struct ComfyDropOverlayCard: View {
+    @Bindable var vm: ComfyDropOverlayViewModel
     let selectedFolderName: String
     let hasSelectedFolder: Bool
-    let loadError: String?
-    let folderItems: [OverlayFolderItem]
     @Binding var hoveredID: URL?
     let onClose: () -> Void
     let dragProvider: (OverlayFolderItem) -> NSItemProvider
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            MouseDropOverlayHeader(
+            ComfyDropOverlayHeader(
                 selectedFolderName: selectedFolderName,
-                itemCount: folderItems.count,
+                itemCount: vm.folderItems.count,
                 onClose: onClose
             )
             
             if !hasSelectedFolder {
-                MouseDropOverlayStateMessage(text: "Pick a folder from the menu bar.", color: .secondary)
-            } else if let loadError {
-                MouseDropOverlayStateMessage(text: loadError, color: .red)
-            } else if folderItems.isEmpty {
-                MouseDropOverlayStateMessage(text: "This folder is empty.", color: .secondary)
+                ComfyDropOverlayStateMessage(text: "Pick a folder from the menu bar.", color: .secondary)
+            } else if let loadError = vm.loadError {
+                ComfyDropOverlayStateMessage(text: loadError, color: .red)
+            } else if vm.folderItems.isEmpty {
+                ComfyDropOverlayStateMessage(text: "This folder is empty.", color: .secondary)
             } else {
-                MouseDropOverlayFilmStrip(
-                    items: folderItems,
+                ComfyDropOverlayFilmStrip(
+                    items: vm.folderItems,
                     hoveredID: $hoveredID,
                     dragProvider: dragProvider
                 )
@@ -57,7 +56,7 @@ struct MouseDropOverlayCard: View {
     }
 }
 
-private struct MouseDropOverlayStateMessage: View {
+private struct ComfyDropOverlayStateMessage: View {
     let text: String
     let color: Color
     

@@ -1,6 +1,6 @@
 //
-//  MouseDropOverlayCoordinator.swift
-//  MouseDrop
+//  ComfyDropOverlayCoordinator.swift
+//  ComfyDrop
 //
 //  Created by Aryan Rogye on 3/12/26.
 //
@@ -8,7 +8,7 @@
 import AppKit
 import SwiftUI
 
-class MouseDropOverlayCoordinator {
+class ComfyDropOverlayCoordinator {
     
     var mouseWatcher: MouseWatcher
     var folderStore : FolderStore
@@ -53,7 +53,7 @@ class MouseDropOverlayCoordinator {
         panel.setContentSize(panelSize)
         
         let view: NSView = NSHostingView(
-            rootView: MouseDropOverlay(
+            rootView: ComfyDropOverlay(
                 folderStore: folderStore,
                 onClose: hide,
             )
@@ -84,7 +84,9 @@ class MouseDropOverlayCoordinator {
         panel?.orderOut(nil)
         isOpen = false
     }
-
+    
+    /// This for the escape
+    /// TODO: Fix this a bit more
     private func attachKeyboardListener() {
         guard panel != nil else {
             print("Cant Attach Keyboard Listener: Panel is nil")

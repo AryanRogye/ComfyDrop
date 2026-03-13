@@ -1,6 +1,6 @@
 //
-//  MouseDropOverlayFilmStrip.swift
-//  MouseDrop
+//  ComfyDropOverlayFilmStrip.swift
+//  ComfyDrop
 //
 //  Created by Aryan Rogye on 3/12/26.
 //
@@ -8,7 +8,7 @@
 import AppKit
 import SwiftUI
 
-struct MouseDropOverlayFilmStrip: View {
+struct ComfyDropOverlayFilmStrip: View {
     let items: [OverlayFolderItem]
     @Binding var hoveredID: URL?
     let dragProvider: (OverlayFolderItem) -> NSItemProvider
