@@ -7,6 +7,7 @@
 
 import Sparkle
 
+@MainActor
 @Observable
 final class UpdateController {
     
@@ -36,6 +37,15 @@ final class UpdateController {
         } catch {
             print("Failed To Start Update Controller: \(error.localizedDescription)")
         }
+    }
+
+    var canCheckForUpdates: Bool {
+        updater.canCheckForUpdates
+    }
+
+    func checkForUpdates() {
+        guard canCheckForUpdates else { return }
+        updater.checkForUpdates()
     }
     
     

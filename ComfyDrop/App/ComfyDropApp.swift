@@ -25,6 +25,7 @@ struct ComfyDropApp: App {
         MenuBarExtra {
             ComfyDropMenuBar(
                 mouseWatcher: appDelegate.mouseWatcher,
+                updateController: appDelegate.updateController,
                 settingsStore: appDelegate.settingsStore,
                 folderStore: appDelegate.folderStore
             )

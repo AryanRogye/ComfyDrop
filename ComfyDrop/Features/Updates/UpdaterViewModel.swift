@@ -114,6 +114,16 @@ final class UpdaterViewModel {
         currentExtraction = nil
         installing = false
     }
+
+    public func acknowledgeNoUpdateFound() {
+        showUpdateNotFoundError = false
+        updateNotFoundError = nil
+    }
+
+    public func acknowledgeUpdateError() {
+        showUpdateError = false
+        updateErrorMessage = nil
+    }
 }
 
 // MARK: - Extraction
