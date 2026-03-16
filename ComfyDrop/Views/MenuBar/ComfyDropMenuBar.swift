@@ -125,13 +125,13 @@ struct ComfyDropMenuBar: View {
         } label: {
             Label(checkForUpdatesTitle, systemImage: "arrow.trianglehead.clockwise")
         }
-        .disabled(!updateController.canCheckForUpdates || updaterVM.showUserInitiatedUpdate)
+        .disabled(updaterVM.showUserInitiatedUpdate)
     }
 
     @ViewBuilder
     private var updatesSection: some View {
         checkForUpdates
-        
+
         if let statusLine = updateStatusLine {
             Text(statusLine)
                 .font(.caption)

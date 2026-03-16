@@ -39,12 +39,7 @@ final class UpdateController {
         }
     }
 
-    var canCheckForUpdates: Bool {
-        updater.canCheckForUpdates
-    }
-
     func checkForUpdates() {
-        guard canCheckForUpdates else { return }
         updater.checkForUpdates()
     }
     

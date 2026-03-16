@@ -38,8 +38,13 @@ if ! [ -x "$generate_appcast" ]; then
     exit 1
 fi
 
+
+codesign --verify --deep --strict "$APP"
+spctl --assess --type exec "$APP"
+
+
 mkdir -p "$BUILD_TEMP"
-cp -r "$APP" "$BUILD_TEMP"
+ditto "$APP" "$BUILD_TEMP/$APP"
 
 cd "$BUILD_TEMP"
 
@@ -61,3 +66,7 @@ mv "$DMG" ../
 cd ..
 
 echo "Built Successfuly"
+
+echo "Verifying Signature"
+codesign --verify --deep --strict /Volumes/ComfyDrop\ Installer/ComfyDrop.app
+
