@@ -9,6 +9,7 @@ import AppKit
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     
+    let updateController = UpdateController()
     var mouseWatcher : MouseWatcher
     var folderStore  = FolderStore()
     var comfyDropOverlay : ComfyDropOverlayCoordinator

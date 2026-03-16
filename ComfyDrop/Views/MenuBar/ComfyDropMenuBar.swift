@@ -28,12 +28,28 @@ struct ComfyDropMenuBar: View {
     @State private var wantsToQuit = false
     
     var body: some View {
-        // MARK: - Toggle
+        startStopComfyDrop
+        
+        selectFolder
+        
+        #if DEBUG
+        mouseVisualizer
+        #endif
+        
+        strictGestures
+        
+        quitButton
+    }
+    
+    // MARK: - Toggle
+    private var startStopComfyDrop: some View {
         Button(vm.started ? "Stop" : "Start") {
             vm.toggle()
         }
-        
-        // MARK: - Folder Selection
+    }
+    
+    // MARK: - Folder Selection
+    private var selectFolder: some View {
         Button(action: {
             isImporting = true
         }) {
@@ -65,18 +81,23 @@ struct ComfyDropMenuBar: View {
                 print("Error selecting folder: \(error.localizedDescription)")
             }
         }
-        
-        #if DEBUG
-        // MARK: - Window
+    }
+    
+    // MARK: - Window
+    private var mouseVisualizer: some View {
         Button("View Mouse Movements") {
             openWindow(id: "MMouseVisualizer")
         }
-        #endif
-        
+    }
+    
+    // MARK: - Strict Gestures
+    private var strictGestures: some View {
         // MARK: - Gesture Control
         Toggle("Strict Gestures", isOn: $settingsStore.strictGestures)
-        
-        
+    }
+    
+    // MARK: - Quit
+    private var quitButton: some View {
         Button("Quit") {
             let alert = NSAlert()
             alert.messageText = "Quit ComfyDrop?"

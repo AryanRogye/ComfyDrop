@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>ComfyDrop</title>
+        <item>
+            <title>1.2</title>
+            <pubDate>Mon, 16 Mar 2026 09:29:45 -0500</pubDate>
+            <sparkle:version>2</sparkle:version>
+            <sparkle:shortVersionString>1.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>26.2</sparkle:minimumSystemVersion>
+            <enclosure url="https://aryanrogye.github.io/ComfyDrop/updates/ComfyDrop-Installer.dmg" length="3218549" type="application/octet-stream" sparkle:edSignature="0VthtalYLmyJg7+GT/oIzwFeoHOGnzU2kBG252/G8pXionigJiRPkcr/5Bnb4Z9e6Yx6A//tSrhsLqm3NE+MBQ=="/>
+        </item>
+    </channel>
+</rss>

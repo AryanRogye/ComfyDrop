@@ -32,12 +32,15 @@ class MouseWatcher {
         self.settingsStore = settingsStore
     }
     
+    var mouseTask: Task<Void, Never>? = nil
+    
     public func start() {
         guard monitor == nil else { return }
         monitor = NSEvent.addGlobalMonitorForEvents(
             matching: [.leftMouseDown ,.leftMouseUp, .leftMouseDragged],
             handler: { [weak self] e in
                 guard let self else { return }
+                
                 /// Activation
                 if (e.type == .leftMouseDown && !isMouseDown) {
                     isMouseDown = true
@@ -46,8 +49,16 @@ class MouseWatcher {
                 }
                 /// Took Mouse Up
                 if (e.type == .leftMouseUp && isMouseDown) {
-                    isMouseDown = false
-                    evaluateMouseLocationsAndClear()
+                    if mouseTask != nil { return }
+                    mouseTask = Task {
+                        defer {
+                            self.mouseTask = nil
+                            self.mouseTask?.cancel()
+                        }
+                        
+                        self.isMouseDown = false
+                        await self.evaluateMouseLocationsAndClear()
+                    }
                 }
                 
                 /// If Mouse is Down Store Mouse Locations
@@ -72,7 +83,48 @@ class MouseWatcher {
      * DISCLAIMER: Algorithm was handwritten by me,
      * though Algorithm was provided by ChatGPT
      */
-    private func evaluateMouseLocationsAndClear() {
+    private func evaluateMouseLocationsAndClear() async {
+        
+        let points = self.mouseLocations
+        let checkSidebySide : Task<Bool, Never> = Task.detached(priority: .userInitiated) { [weak self] in
+            guard let self else { return false }
+            guard points.count >= 2 else { return false }
+            
+            let xs = points.map(\.x)
+            let ys = points.map(\.y)
+            
+            guard let minX = xs.min(),
+                  let maxX = xs.max(),
+                  let minY = ys.min(),
+                  let maxY = ys.max() else {
+                return false
+            }
+            
+            let width = maxX - minX
+            let height = maxY - minY
+            
+            // avoid garbage tiny movements
+            let minMovement: CGFloat = 20
+            if max(width, height) < minMovement {
+                return false
+            }
+            
+            let ratio: CGFloat = 2.0
+            
+            // horizontal line
+            if width > height * ratio {
+                return true
+            }
+            
+            // vertical line
+            if height > width * ratio {
+                return true
+            }
+            
+            // otherwise more balanced = circle/curve/diagonal/mixed
+            return false
+        }
+        
         guard mouseLocations.count >= 3 else {
             mouseLocations.removeAll(keepingCapacity: true)
             return
