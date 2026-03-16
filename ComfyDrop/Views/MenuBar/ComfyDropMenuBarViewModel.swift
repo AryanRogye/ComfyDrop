@@ -11,7 +11,9 @@ import Foundation
 @MainActor
 class ComfyDropMenuBarViewModel {
     
-    var started = false
+    var started : Bool {
+        mouseWatcher.monitor != nil
+    }
     
     let mouseWatcher : MouseWatcher
     let folderStore  : FolderStore
@@ -27,8 +29,6 @@ class ComfyDropMenuBarViewModel {
         } else {
             start()
         }
-        
-        started.toggle()
     }
     
     public func start() {

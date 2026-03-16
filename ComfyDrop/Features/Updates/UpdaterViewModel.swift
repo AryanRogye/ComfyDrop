@@ -7,6 +7,7 @@
 
 import Foundation
 import Sparkle
+import AppKit
 
 @Observable
 @MainActor
@@ -82,6 +83,37 @@ final class UpdaterViewModel {
     public func startedInstalling() {
         installing = true
     }
+    
+    /// Updates Title
+    public var checkForUpdatesTitle: String {
+        return showUserInitiatedUpdate
+        ? "Checking for Updates"
+        : "Check for Updates"
+    }
+
+    /// Status Line For View's
+    public var updateStatusLine: String? {
+        switch phase {
+        case .downloading(let progress, let total):
+            /// Downloading (show download percentage)
+            if let total, total > 0 {
+                let percent = min(Double(progress) / Double(total), 1.0)
+                return "Downloading update \(Int(percent * 100))%"
+            }
+            return "Downloading update..."
+        case .extracting(let progress):
+            /// Extracting (show progress of extracting
+            if let progress {
+                return "Preparing update \(Int(progress * 100))%"
+            }
+            return "Preparing update..."
+        case .installing:
+            /// Installing Update
+            return "Installing update..."
+        default:
+            return nil
+        }
+    }
 
     public func resetProgressKeepUIVisible() {
         updateDownloadStarted = false
@@ -123,6 +155,77 @@ final class UpdaterViewModel {
     public func acknowledgeUpdateError() {
         showUpdateError = false
         updateErrorMessage = nil
+    }
+}
+
+// MARK: - UI Related
+extension UpdaterViewModel {
+    public func presentPermissionAlert() {
+        let alert = AlertMaker.makeAlert(
+            messageText: "Enable Automatic Updates?",
+            informativeText: "ComfyDrop can automatically check for new versions in the background.",
+            style: .informational,
+            buttons: ["Enable", "Not Now"]
+        )
+        
+        let response = alert.runModal()
+        completePermission(
+            automaticUpdateChecks: response == .alertFirstButtonReturn
+        )
+    }
+    public func presentNoUpdateAlert() {
+        let alert = AlertMaker.makeAlert(
+            messageText: "You're Up to Date",
+            informativeText: updateNotFoundError ?? "No updates are available right now.",
+            style: .informational,
+            buttons: ["OK"]
+        )
+        
+        alert.runModal()
+        acknowledgeNoUpdateFound()
+    }
+    public func presentUpdateErrorAlert() {
+        let alert = AlertMaker.makeAlert(
+            messageText: "Update Failed",
+            informativeText: updateErrorMessage ?? "Something went wrong while checking for updates.",
+            style: .warning,
+            buttons: ["OK"]
+        )
+        
+        alert.runModal()
+        acknowledgeUpdateError()
+    }
+    public func presentUpdateFoundAlert() {
+        guard let appcast = appcast else { return }
+        
+        let version = appcast.displayVersionString
+        let title = version.isEmpty
+        ? "Update Available"
+        : "Version \(version) Is Available"
+        
+        let body: String = {
+            guard let raw = appcast.itemDescription, !raw.isEmpty else {
+                return "A new version of ComfyDrop is ready to install."
+            }
+            // Strip HTML tags if Sparkle gives you rich release notes
+            return raw.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
+        }()
+        
+        let alert = AlertMaker.makeAlert(
+            messageText: title,
+            informativeText: body,
+            style: .informational,
+            buttons: ["Install", "Skip This Version", "Later"]
+        )
+        
+        switch alert.runModal() {
+        case .alertFirstButtonReturn:
+            completeUpdateFound(choice: .install)
+        case .alertSecondButtonReturn:
+            completeUpdateFound(choice: .skip)
+        default:
+            completeUpdateFound(choice: .dismiss)
+        }
     }
 }
 

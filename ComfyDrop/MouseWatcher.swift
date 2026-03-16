@@ -13,8 +13,7 @@ class MouseWatcher {
     
     private var settingsStore : SettingsStore
     
-    @ObservationIgnored
-    private var monitor: Any?
+    public var monitor: Any?
     /// We Wont be showing this anyhwere so we dont need to "observe it" its more for a internal flag
     @ObservationIgnored
     private var isMouseDown: Bool = false
@@ -24,6 +23,7 @@ class MouseWatcher {
     public var center: NSPoint = .zero
     
     /// have it do nothing for now
+    @ObservationIgnored
     public var onMouseActivation: (() -> Void) = {
         
     }
@@ -32,6 +32,7 @@ class MouseWatcher {
         self.settingsStore = settingsStore
     }
     
+    @ObservationIgnored
     var mouseTask: Task<Void, Never>? = nil
     
     public func start() {

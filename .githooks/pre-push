@@ -1,0 +1,24 @@
+#!/bin/zsh
+
+set -euo pipefail
+
+REPO_ROOT="${0:A:h:h}"
+PROJECT_PATH="$REPO_ROOT/ComfyDrop.xcodeproj"
+SCHEME="ComfyDrop"
+CONFIGURATION="Debug"
+
+echo "pre-push: building $SCHEME ($CONFIGURATION)"
+xcodebuild \
+  -project "$PROJECT_PATH" \
+  -scheme "$SCHEME" \
+  -configuration "$CONFIGURATION" \
+  build
+
+echo "pre-push: testing $SCHEME ($CONFIGURATION)"
+xcodebuild \
+  -project "$PROJECT_PATH" \
+  -scheme "$SCHEME" \
+  -configuration "$CONFIGURATION" \
+  test
+
+echo "pre-push: build and tests passed"

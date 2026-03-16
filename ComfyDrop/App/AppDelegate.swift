@@ -24,11 +24,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             folderStore: folderStore
         )
         super.init()
+        
+        settingsStore.onStartOnLaunchIsOn = { [weak self] in
+            guard let self else { return }
+            self.mouseWatcher.start()
+        }
+        settingsStore.onStartOnLaunchIsOff = { [weak self] in
+            guard let self else { return }
+            self.mouseWatcher.stop()
+        }
+        
         mouseWatcher.onMouseActivation = { [weak self] in
             guard let self else { return }
             comfyDropOverlay.hide()
             comfyDropOverlay.show()
         }
+        settingsStore.sync()
     }
     
     public func applicationDidFinishLaunching(_ notification: Notification) {
