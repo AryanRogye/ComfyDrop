@@ -8,6 +8,7 @@
 import SwiftUI
 import Sparkle
 import UniformTypeIdentifiers
+import UserNotifications
 
 /// MenuBar View
 @MainActor
@@ -19,7 +20,7 @@ struct ComfyDropMenuBar: View {
     private let updateController: UpdateController
     @State private var vm : ComfyDropMenuBarViewModel
     @State private var isImporting = false
-    
+    @State private var hasShownOnboarding: Bool = false
     
     init(
         mouseWatcher: MouseWatcher,
@@ -104,6 +105,12 @@ struct ComfyDropMenuBar: View {
                 }
                 
                 folderStore.setWatchFolder(url)
+                if settingsStore.isFirstLaunch && !hasShownOnboarding{
+                    /// dont turn off isFirstLaunch here because we may want to show other things throughout the app
+                    /// on the first launch
+                    showOnboardingNotification()
+                    hasShownOnboarding = true
+                }
                 
             case .failure(let error):
                 print("Error selecting folder: \(error.localizedDescription)")
@@ -203,5 +210,18 @@ struct ComfyDropMenuBar: View {
                 NSApp.terminate(nil)
             }
         }
+    }
+    
+    func showOnboardingNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = "ComfyDrop is ready"
+        content.body = "Tap Start in the menu bar to activate."
+        
+        let request = UNNotificationRequest(
+            identifier: "onboarding",
+            content: content,
+            trigger: nil // deliver immediately
+        )
+        UNUserNotificationCenter.current().add(request)
     }
 }

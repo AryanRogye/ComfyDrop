@@ -13,6 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var mouseWatcher : MouseWatcher
     var folderStore  = FolderStore()
     var comfyDropOverlay : ComfyDropOverlayCoordinator
+    var onboarding       : OnboardingCoordinator
     var settingsStore = SettingsStore()
     
     @MainActor
@@ -23,6 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             mouseWatcher: mouseWatcher,
             folderStore: folderStore
         )
+        self.onboarding = OnboardingCoordinator()
         super.init()
         
         settingsStore.onStartOnLaunchIsOn = { [weak self] in
@@ -39,6 +41,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             comfyDropOverlay.hide()
             comfyDropOverlay.show()
         }
+        mouseWatcher.onFirstLaunchDemo = { [weak self] in
+            guard let self else { return }
+            onboarding.show()
+        }
         settingsStore.sync()
     }
     
@@ -46,6 +52,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     public func applicationWillTerminate(_ notification: Notification) {
+        mouseWatcher.stop()
+        settingsStore.isFirstLaunch = false
     }
     
     public func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

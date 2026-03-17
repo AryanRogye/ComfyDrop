@@ -28,6 +28,12 @@ class MouseWatcher {
         
     }
     
+    /// Nothing for now
+    @ObservationIgnored
+    public var onFirstLaunchDemo: (() -> Void) = {
+        
+    }
+    
     init(settingsStore: SettingsStore) {
         self.settingsStore = settingsStore
     }

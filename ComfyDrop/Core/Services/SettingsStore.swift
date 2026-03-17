@@ -13,6 +13,7 @@ extension Defaults.Keys {
     static let strictGestures = Key<Bool>("strictGesturesKey", default: true)
     static let startOnLaunch = Key<Bool>("startOnLaunchKey", default: false)
     static let launchAtLogin = Key<Bool>("launchAtLoginKey", default: false)
+    static let isFirstLaunch = Key<Bool>("isFirstLaunchKey", default: true)
 }
 
 @Observable
@@ -37,10 +38,18 @@ class SettingsStore {
         }
     }
     
+    /// Launch App at Login
     var launchAtLogin: Bool = Defaults[.launchAtLogin] {
         didSet {
             Defaults[.launchAtLogin] = launchAtLogin
             handleLaunchAtLoginChange()
+        }
+    }
+    
+    /// If is the users first time launching the app
+    var isFirstLaunch: Bool = Defaults[.isFirstLaunch] {
+        didSet {
+            Defaults[.isFirstLaunch] = isFirstLaunch
         }
     }
     
