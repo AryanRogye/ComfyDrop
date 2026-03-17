@@ -10,16 +10,16 @@ import AppKit
 
 @Observable
 @MainActor
-final class ComfyDropOverlayViewModel {
+public final class ComfyDropOverlayViewModel {
     
     /// Objects
     let monitor = FolderMonitor()
     let folderStore: FolderStore
     
-    var folderItems: [OverlayFolderItem] = []
+    public var folderItems: [OverlayFolderItem] = []
     var loadError: String?
 
-    init(folderStore: FolderStore) {
+    public init(folderStore: FolderStore) {
         self.folderStore = folderStore
     }
     
@@ -44,6 +44,7 @@ final class ComfyDropOverlayViewModel {
         guard let folderURL = folderStore.watchFolder else {
             folderItems = []
             loadError = nil
+            print("|ComfyDropOverlayViewModel:reloadFolderItems| No watch folder set.")
             return
         }
         

@@ -16,11 +16,9 @@ class ComfyDropMenuBarViewModel {
     }
     
     let mouseWatcher : MouseWatcher
-    let folderStore  : FolderStore
     
-    init(mouseWatcher: MouseWatcher, folderStore: FolderStore) {
+    init(mouseWatcher: MouseWatcher) {
         self.mouseWatcher = mouseWatcher
-        self.folderStore = folderStore
     }
     
     public func toggle() {

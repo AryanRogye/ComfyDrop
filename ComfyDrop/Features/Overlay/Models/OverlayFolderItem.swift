@@ -8,8 +8,8 @@
 import AppKit
 import UniformTypeIdentifiers
 
-struct OverlayFolderItem: Identifiable {
-    let id: URL
+public struct OverlayFolderItem: Identifiable {
+    public let id: URL
     let url: URL
     let isDirectory: Bool
     let previewImage: NSImage?

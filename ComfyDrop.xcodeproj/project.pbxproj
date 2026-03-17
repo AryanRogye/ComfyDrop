@@ -32,7 +32,7 @@
 		9B28E83C2F6849B3002AC079 /* Exceptions for "ComfyDrop" folder in "ComfyDrop" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Config/Info.plist,
 			);
 			target = 9B15CC472F630C4500CF8CBA /* ComfyDrop */;
 		};
@@ -363,7 +363,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ComfyDrop/Info.plist;
+				INFOPLIST_FILE = ComfyDrop/Config/Info.plist;
 				INFOPLIST_KEY_NSDesktopFolderUsageDescription = "We Need To Access This Folder In Case U Wanna Pull Out Of This Folder";
 				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "We Need To Access This Folder In Case U Wanna Pull Out Of This Folder";
 				INFOPLIST_KEY_NSDownloadsFolderUsageDescription = "We Need To Access This Folder In Case U Wanna Pull Out Of This Folder";
@@ -398,7 +398,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ComfyDrop/Info.plist;
+				INFOPLIST_FILE = ComfyDrop/Config/Info.plist;
 				INFOPLIST_KEY_NSDesktopFolderUsageDescription = "We Need To Access This Folder In Case U Wanna Pull Out Of This Folder";
 				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "We Need To Access This Folder In Case U Wanna Pull Out Of This Folder";
 				INFOPLIST_KEY_NSDownloadsFolderUsageDescription = "We Need To Access This Folder In Case U Wanna Pull Out Of This Folder";

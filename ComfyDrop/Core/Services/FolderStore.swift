@@ -11,6 +11,7 @@ import SwiftUI
 
 /**
  * Handles Persistance of selected folder
+ * Sandbox is off cuz its too much work, working with bookmarks
  */
 @MainActor
 public final class FolderStore: ObservableObject {
@@ -25,6 +26,7 @@ public final class FolderStore: ObservableObject {
             watchFolder = URL(fileURLWithPath: path)
         }
     }
+    
     
     public func setWatchFolder(_ url: URL) {
         watchFolder = url

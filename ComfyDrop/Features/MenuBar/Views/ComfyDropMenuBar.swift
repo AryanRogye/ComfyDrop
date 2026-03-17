@@ -13,6 +13,7 @@ import UniformTypeIdentifiers
 @MainActor
 struct ComfyDropMenuBar: View {
     
+    @ObservedObject private var folderStore: FolderStore
     @Bindable private var settingsStore: SettingsStore
     @Bindable private var updaterVM: UpdaterViewModel
     private let updateController: UpdateController
@@ -26,12 +27,12 @@ struct ComfyDropMenuBar: View {
         settingsStore: SettingsStore,
         folderStore: FolderStore
     ) {
+        self.folderStore = folderStore
         self.updateController = updateController
         self.updaterVM = updateController.updaterVM
         self.settingsStore = settingsStore
         vm = ComfyDropMenuBarViewModel(
             mouseWatcher: mouseWatcher,
-            folderStore: folderStore
         )
     }
     
@@ -102,7 +103,7 @@ struct ComfyDropMenuBar: View {
                     }
                 }
                 
-                vm.folderStore.setWatchFolder(url)
+                folderStore.setWatchFolder(url)
                 
             case .failure(let error):
                 print("Error selecting folder: \(error.localizedDescription)")
@@ -119,11 +120,16 @@ struct ComfyDropMenuBar: View {
     
     // MARK: - Folder Selection
     private var selectFolder: some View {
-        Button(action: {
-            isImporting = true
-        }) {
-            if let folder = vm.folderStore.watchFolder {
-                Text("Selected: \(folder.lastPathComponent)")
+        Menu {
+            Button("Change Folder") { isImporting = true }
+            if folderStore.watchFolder != nil {
+                Button("Clear", role: .destructive) {
+                    folderStore.clear()
+                }
+            }
+        } label: {
+            if let folder = folderStore.watchFolder {
+                Text("Folder: \(folder.lastPathComponent)")
             } else {
                 Text("Pick Folder")
             }
