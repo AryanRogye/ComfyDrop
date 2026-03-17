@@ -1,5 +1,9 @@
 # ComfyDrop
 
+<p align="center">
+  <img src="./ComfyDrop.png" alt="ComfyDrop app icon" width="220" />
+</p>
+
 tbh i started this out as a test project, I was studying for a ml midterm when I was using `Command + Shift + 4` To Crop Take Images and drop them into notion, 
 issue became when i would have to find them again, I have the dock setup to point to my desktop folder but thought this is very slow, 
 
