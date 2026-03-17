@@ -33,6 +33,7 @@ struct ComfyDropApp: App {
         } label: {
             Image(systemName: "computermouse")
         }
+        .menuBarExtraStyle(.menu)
         
 #if DEBUG
         Window("MouseVisualizer", id: "MMouseVisualizer") {

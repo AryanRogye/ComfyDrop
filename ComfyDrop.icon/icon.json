@@ -1,0 +1,112 @@
+{
+  "fill-specializations" : [
+    {
+      "value" : {
+        "linear-gradient" : [
+          "display-p3:0.00000,0.42745,0.46667,1.00000",
+          "srgb:0.51373,0.77255,0.74510,1.00000"
+        ]
+      }
+    },
+    {
+      "appearance" : "dark",
+      "value" : {
+        "linear-gradient" : [
+          "display-p3:0.00000,0.42745,0.46667,1.00000",
+          "srgb:0.51373,0.77255,0.74510,1.00000"
+        ]
+      }
+    }
+  ],
+  "groups" : [
+    {
+      "blur-material" : null,
+      "layers" : [
+        {
+          "image-name" : "Dirt.svg",
+          "name" : "Dirt",
+          "position" : {
+            "scale" : 1.13,
+            "translation-in-points" : [
+              154,
+              365
+            ]
+          }
+        },
+        {
+          "blend-mode" : "screen",
+          "fill" : {
+            "linear-gradient" : [
+              "srgb:0.00000,0.42745,0.46667,1.00000",
+              "display-p3:0.35597,0.57278,0.60834,1.00000"
+            ]
+          },
+          "glass-specializations" : [
+            {
+              "value" : true
+            },
+            {
+              "appearance" : "tinted",
+              "value" : true
+            }
+          ],
+          "image-name" : "Arrow.svg",
+          "name" : "Arrow",
+          "opacity-specializations" : [
+            {
+              "value" : 1
+            },
+            {
+              "appearance" : "tinted",
+              "value" : 0.21
+            }
+          ],
+          "position" : {
+            "scale" : 1.01,
+            "translation-in-points" : [
+              51,
+              196
+            ]
+          }
+        },
+        {
+          "glass-specializations" : [
+            {
+              "value" : false
+            },
+            {
+              "appearance" : "dark",
+              "value" : false
+            }
+          ],
+          "image-name" : "Folder_Broken.svg",
+          "name" : "Folder_Broken",
+          "position" : {
+            "scale" : 1.13,
+            "translation-in-points" : [
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "lighting" : "individual",
+      "name" : "MainApp",
+      "shadow" : {
+        "kind" : "layer-color",
+        "opacity" : 0.5
+      },
+      "specular" : true,
+      "translucency" : {
+        "enabled" : false,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}

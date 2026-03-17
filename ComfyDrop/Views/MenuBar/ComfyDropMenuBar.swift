@@ -19,7 +19,6 @@ struct ComfyDropMenuBar: View {
     @State private var vm : ComfyDropMenuBarViewModel
     @State private var isImporting = false
     
-    @Environment(\.openWindow) var openWindow
     
     init(
         mouseWatcher: MouseWatcher,
@@ -52,17 +51,22 @@ struct ComfyDropMenuBar: View {
                 updatesSection
                 versionInfo
             }
-#if DEBUG
-            Section("Debug") {
-                mouseVisualizer
-            }
-#endif
-            Divider()
             
-            Section("Settings") {
-                startOnLaunch
-                strictGestures
+            Menu {
+                Section("Behavior") {
+                    launchOnLogin
+                    startOnLaunch
+                    strictGestures
+                }
+#if DEBUG
+                Section("Debug") {
+                    mouseVisualizer
+                }
+#endif
+            } label: {
+                Label("Settings", systemImage: "gear")
             }
+            
             Divider()
             quitButton
         }
@@ -81,26 +85,6 @@ struct ComfyDropMenuBar: View {
         .onChange(of: updaterVM.appcast != nil && updaterVM.updateState != nil) { _, show in
             guard show else { return }
             updaterVM.presentUpdateFoundAlert()
-        }
-    }
-    
-    // MARK: - Toggle
-    private var startStopComfyDrop: some View {
-        Button(vm.started ? "Stop" : "Start") {
-            vm.toggle()
-        }
-    }
-    
-    // MARK: - Folder Selection
-    private var selectFolder: some View {
-        Button(action: {
-            isImporting = true
-        }) {
-            if let folder = vm.folderStore.watchFolder {
-                Text("Selected: \(folder.lastPathComponent)")
-            } else {
-                Text("Pick Folder")
-            }
         }
         .fileImporter(
             isPresented: $isImporting,
@@ -126,10 +110,31 @@ struct ComfyDropMenuBar: View {
         }
     }
     
+    // MARK: - Toggle
+    private var startStopComfyDrop: some View {
+        Button(vm.started ? "Stop" : "Start") {
+            vm.toggle()
+        }
+    }
+    
+    // MARK: - Folder Selection
+    private var selectFolder: some View {
+        Button(action: {
+            isImporting = true
+        }) {
+            if let folder = vm.folderStore.watchFolder {
+                Text("Selected: \(folder.lastPathComponent)")
+            } else {
+                Text("Pick Folder")
+            }
+        }
+    }
+    
 #if DEBUG
+    @Environment(\.openWindow) var openWindow
     // MARK: - Window
     private var mouseVisualizer: some View {
-        Button("View Mouse Movements") {
+        Button("Mouse Visualizer") {
             openWindow(id: "MMouseVisualizer")
         }
     }
@@ -162,9 +167,15 @@ struct ComfyDropMenuBar: View {
         .minimumScaleFactor(0.8)
     }
     
+    // MARK: - Launch On Login
+    private var launchOnLogin: some View {
+        Toggle("Launch at Login", isOn: $settingsStore.launchAtLogin)
+    }
+    
     // MARK: - Start On Launch
     private var startOnLaunch: some View {
-        Toggle("Start On Launch", isOn: $settingsStore.startOnLaunch)
+        Toggle("Run On App Launch", isOn: $settingsStore.startOnLaunch)
+            .help("Automatically starts ComfyDrop when the app opens")
     }
     
     // MARK: - Strict Gestures
