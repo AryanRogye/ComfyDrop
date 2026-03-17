@@ -45,6 +45,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             guard let self else { return }
             onboarding.show()
         }
+        mouseWatcher.onFirstLaunchDemoDestroy = { [weak self] in
+            guard let self else { return }
+            onboarding.destroy()
+            settingsStore.isFirstLaunch = false
+        }
         settingsStore.sync()
     }
     
@@ -53,7 +58,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     public func applicationWillTerminate(_ notification: Notification) {
         mouseWatcher.stop()
-        settingsStore.isFirstLaunch = false
     }
     
     public func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

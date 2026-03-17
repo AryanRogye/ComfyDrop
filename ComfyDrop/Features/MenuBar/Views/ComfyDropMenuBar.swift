@@ -41,7 +41,6 @@ struct ComfyDropMenuBar: View {
     
     var body: some View {
         Group {
-            
             Section("Controls") {
                 startStopComfyDrop
                 selectFolder
@@ -63,6 +62,7 @@ struct ComfyDropMenuBar: View {
 #if DEBUG
                 Section("Debug") {
                     mouseVisualizer
+                    clearDefaultsAndRestart
                 }
 #endif
             } label: {
@@ -105,7 +105,7 @@ struct ComfyDropMenuBar: View {
                 }
                 
                 folderStore.setWatchFolder(url)
-                if settingsStore.isFirstLaunch && !hasShownOnboarding{
+                if settingsStore.isFirstLaunch && !hasShownOnboarding {
                     /// dont turn off isFirstLaunch here because we may want to show other things throughout the app
                     /// on the first launch
                     showOnboardingNotification()
@@ -119,9 +119,12 @@ struct ComfyDropMenuBar: View {
     }
     
     // MARK: - Toggle
+    @ViewBuilder
     private var startStopComfyDrop: some View {
-        Button(vm.started ? "Stop" : "Start") {
-            vm.toggle()
+        if folderStore.watchFolder != nil {
+            Button(vm.started ? "Stop" : "Start") {
+                vm.toggle()
+            }
         }
     }
     
@@ -149,6 +152,26 @@ struct ComfyDropMenuBar: View {
     private var mouseVisualizer: some View {
         Button("Mouse Visualizer") {
             openWindow(id: "MMouseVisualizer")
+        }
+    }
+    
+    private var clearDefaultsAndRestart: some View {
+        Button("Clear Defaults") {
+            let alert = AlertMaker.makeAlert(
+                messageText: "[DEBUG] Warning",
+                informativeText: "This will clear all user settings and restart the app. Are you sure?",
+                style: .informational,
+                buttons: ["Reset", "Cancel"]
+            )
+            
+            if alert.runModal() == .alertFirstButtonReturn {
+                let process = Process()
+                process.executableURL = URL(fileURLWithPath: "/usr/bin/defaults")
+                process.arguments = ["delete", "com.aryanrogye.ComfyDrop"]
+                try? process.run()
+                process.waitUntilExit()
+                NSApp.terminate(nil)
+            }
         }
     }
 #endif
